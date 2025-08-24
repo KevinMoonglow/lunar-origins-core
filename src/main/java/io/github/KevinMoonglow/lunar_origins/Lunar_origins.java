@@ -4,6 +4,7 @@ import io.github.KevinMoonglow.lunar_origins.effects.LunarOriginsEffects;
 import io.github.KevinMoonglow.lunar_origins.enchantments.LunarOriginsEnchants;
 import io.github.KevinMoonglow.lunar_origins.item.Goggles;
 import io.github.KevinMoonglow.lunar_origins.item.LunarOriginsItems;
+import io.github.KevinMoonglow.lunar_origins.power.LunarOriginsPowers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -20,6 +21,8 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class Lunar_origins implements ModInitializer {
@@ -29,6 +32,7 @@ public class Lunar_origins implements ModInitializer {
     public static final Identifier SHIPWRECK_TREASURE_LOOT_ID = new Identifier("chests/shipwreck_treasure");
     public static final Identifier DESERT_TEMPLE_TREASURE_ID = new Identifier("chests/desert_pyramid");
     public static final Identifier BASTION_TREASURE_ID = new Identifier("chests/bastion_treasure");
+    public static final Logger LOGGER = LoggerFactory.getLogger(Lunar_origins.class);
 
     public void initLoot() {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
@@ -125,6 +129,7 @@ public class Lunar_origins implements ModInitializer {
         LunarOriginsEnchants.initEnchants();
         LunarOriginsEffects.initEffects();
         LunarOriginsItems.initItems();
+        LunarOriginsPowers.register();
         initLoot();
         initEvents();
     }

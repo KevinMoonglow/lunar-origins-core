@@ -1,7 +1,7 @@
 package io.github.KevinMoonglow.lunar_origins.mixin;
 
+import io.github.KevinMoonglow.lunar_origins.power.CrawlingPower;
 import io.github.apace100.apoli.component.PowerHolderComponent;
-import io.github.eggohito.eggolib.power.CrawlingPower;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -60,22 +60,7 @@ public abstract class InGameHudMixin {
 
                 if(nbt != null) {
                     long waterLevel = nbt.getLong("waterLevel");
-                    float viewLevelP = entity.getPitch() / 90f;
-                    float viewWaterScaling = viewLevelP >= 0f ? viewLevelP * 2.0f + 1.0f : viewLevelP * 2.0f - 1.0f;
-
-                    float waterLevelP = (float) waterLevel / GlassBowl.MAX_WATER;
-                    float eyeLevelP = (float) GlassBowl.EYE_LEVEL / GlassBowl.MAX_WATER;
-
-
-                    float waterLevelAdjusted;
-                    if(viewWaterScaling > 0)
-                        waterLevelAdjusted = waterLevelP * viewWaterScaling;
-                    else
-                        waterLevelAdjusted = 1 - ((1 - waterLevelP) * -viewWaterScaling);
-
-
-                    float waterDiff = waterLevelAdjusted - eyeLevelP;
-                    float level = waterDiff > 0f ? waterDiff / (1.0f - eyeLevelP) : waterDiff / eyeLevelP;
+                    float level = getLevel(entity, (float) waterLevel);
 
                     if(item instanceof DivingHelmet)
                         invokeRenderOverlay(context, DIVING_HELMET_OVERLAY, 1.0f);
@@ -102,6 +87,26 @@ public abstract class InGameHudMixin {
                 invokeRenderOverlay(context, GOGGLES_OVERLAY, 1.0f);
             }
         }
+    }
+
+    @Unique
+    private static float getLevel(LivingEntity entity, float waterLevel) {
+        float viewLevelPitch = entity.getPitch() / 90f;
+        float viewWaterScaling = viewLevelPitch >= 0f ? viewLevelPitch * 2.0f + 1.0f : viewLevelPitch * 2.0f - 1.0f;
+
+        float waterLevelP = waterLevel / GlassBowl.MAX_WATER;
+        float eyeLevelP = (float) GlassBowl.EYE_LEVEL / GlassBowl.MAX_WATER;
+
+
+        float waterLevelAdjusted;
+        if(viewWaterScaling > 0)
+            waterLevelAdjusted = waterLevelP * viewWaterScaling;
+        else
+            waterLevelAdjusted = 1 - ((1 - waterLevelP) * -viewWaterScaling);
+
+
+        float waterDiff = waterLevelAdjusted - eyeLevelP;
+        return waterDiff > 0f ? waterDiff / (1.0f - eyeLevelP) : waterDiff / eyeLevelP;
     }
 
     @Unique
