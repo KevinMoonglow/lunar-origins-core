@@ -120,14 +120,14 @@ public class Lunar_originsClient implements ClientModInitializer {
 
         //TrinketsApi.registerTrinketPredicate();
 
-        @Nullable PowerType waterFocusPower = null;
+        @Nullable PowerType<?> waterFocusPower = null;
         try {
-            waterFocusPower = PowerTypeRegistry.get(new Identifier(Lunar_origins.MOD_ID, "gnap_water_focus"));
+            waterFocusPower = PowerTypeRegistry.get(new Identifier(Lunar_origins.MOD_ID, "gnaporeon/water_focus"));
         }
         catch(IllegalArgumentException ignored) {}
 
 
-        @Nullable PowerType finalWaterFocusPower = waterFocusPower;
+        @Nullable PowerType<?> finalWaterFocusPower = waterFocusPower;
         ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
             if(stack.getItem() == LunarOriginsItems.GNAP_GLASSES) {
                 PlayerEntity player = MinecraftClient.getInstance().player;
