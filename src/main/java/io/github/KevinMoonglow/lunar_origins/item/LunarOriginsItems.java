@@ -5,14 +5,12 @@ import io.github.KevinMoonglow.lunar_origins.effects.LunarOriginsEffects;
 import io.github.KevinMoonglow.lunar_origins.material.*;
 import io.github.KevinMoonglow.lunar_origins.mixin.BrewingRecipeRegistryMixin;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class LunarOriginsItems {
@@ -28,19 +26,8 @@ public class LunarOriginsItems {
     public static final Item KELP_CARROT = new Item(
             new FabricItemSettings().food(FoodComponents.KELP_CARROT));
     public static final Item GNAP_GLASSES = new GnapGlasses(new FabricItemSettings().maxCount(1));
-    public static final ItemGroup LUNAR_ORIGINS_GROUP = FabricItemGroup.builder()
-        .icon(() -> new ItemStack(LunarOriginsItems.LUNA_GLASSES))
-        .displayName(Text.translatable("itemGroup.lunar_origins.lunar_origins"))
-        .entries((context, entries) -> {
-            entries.add(LunarOriginsItems.LUNA_GLASSES);
-            entries.add(LunarOriginsItems.GNAP_GLASSES);
-            entries.add(LunarOriginsItems.FISH_BOWL);
-            entries.add(LunarOriginsItems.GLASS_BOWL);
-            entries.add(LunarOriginsItems.AMETHYST_BOWL);
-            entries.add(LunarOriginsItems.DIVING_HELMET);
-            entries.add(LunarOriginsItems.KELP_CARROT);
-        })
-        .build();
+
+
     public static final ArmorMaterial glassesArmorMaterial = new GlassesArmorMaterial();
     public static final Item LUNA_GLASSES = new LunaGlasses(glassesArmorMaterial, ArmorItem.Type.HELMET,
             new FabricItemSettings().maxCount(1));
@@ -66,12 +53,11 @@ public class LunarOriginsItems {
             new FabricItemSettings()
                     .food(FoodComponents.GLIMMERING_AQUA_GUMMY)
                     .maxCount(16));
-    public static final Item WOPOL_ICON = new Item(
-            new FabricItemSettings()
-    );
-    public static final Item GNAPOREON_ICON = new Item(
-            new FabricItemSettings()
-    );
+
+    public static final Item WOPOL_ICON = new Item(new FabricItemSettings());
+    public static final Item GNAPOREON_ICON = new Item(new FabricItemSettings());
+    public static final Item LUNAR_BOOK = new Item(new FabricItemSettings());
+
     public static final Item GLASSES_ARM = new Item(new FabricItemSettings());
     public static final Item GLASSES_ARM_RED = new Item(new FabricItemSettings());
     public static final Item GLASSES_FRAME = new Item(new FabricItemSettings());
@@ -104,6 +90,7 @@ public class LunarOriginsItems {
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.AWKWARD, GLIMMERING_AQUA_GUMMY, LunarOriginsItems.HYDRATION_POTION);
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(LunarOriginsItems.HYDRATION_POTION, Items.REDSTONE, LunarOriginsItems.LONG_HYDRATION_POTION);
 
+        Registry.register(Registries.ITEM, new Identifier(Lunar_origins.MOD_ID, "lunar_book"), LunarOriginsItems.LUNAR_BOOK);
         Registry.register(Registries.ITEM, new Identifier(Lunar_origins.MOD_ID, "luna_glasses"), LunarOriginsItems.LUNA_GLASSES);
         Registry.register(Registries.ITEM, new Identifier(Lunar_origins.MOD_ID, "gnap_glasses"), LunarOriginsItems.GNAP_GLASSES);
         Registry.register(Registries.ITEM, new Identifier(Lunar_origins.MOD_ID, "fish_bowl"), LunarOriginsItems.FISH_BOWL);
@@ -143,6 +130,7 @@ public class LunarOriginsItems {
         //        GlassBowl.fluidStorage, GLASS_BOWL);
 
 
-        Registry.register(Registries.ITEM_GROUP, new Identifier("lunar_origins", "lunar_origins"), LunarOriginsItems.LUNAR_ORIGINS_GROUP);
+
+
     }
 }

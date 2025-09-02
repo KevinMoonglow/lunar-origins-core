@@ -3,6 +3,7 @@ package io.github.KevinMoonglow.lunar_origins;
 import io.github.KevinMoonglow.lunar_origins.effects.LunarOriginsEffects;
 import io.github.KevinMoonglow.lunar_origins.enchantments.LunarOriginsEnchants;
 import io.github.KevinMoonglow.lunar_origins.item.Goggles;
+import io.github.KevinMoonglow.lunar_origins.item.LunarOriginsCreativeTabs;
 import io.github.KevinMoonglow.lunar_origins.item.LunarOriginsItems;
 import io.github.KevinMoonglow.lunar_origins.power.LunarOriginsPowers;
 import net.fabricmc.api.ModInitializer;
@@ -32,6 +33,7 @@ public class Lunar_origins implements ModInitializer {
     public static final Identifier SHIPWRECK_TREASURE_LOOT_ID = new Identifier("chests/shipwreck_treasure");
     public static final Identifier DESERT_TEMPLE_TREASURE_ID = new Identifier("chests/desert_pyramid");
     public static final Identifier BASTION_TREASURE_ID = new Identifier("chests/bastion_treasure");
+    @SuppressWarnings("unused")
     public static final Logger LOGGER = LoggerFactory.getLogger(Lunar_origins.class);
 
     public void initLoot() {
@@ -129,6 +131,7 @@ public class Lunar_origins implements ModInitializer {
         LunarOriginsEnchants.initEnchants();
         LunarOriginsEffects.initEffects();
         LunarOriginsItems.initItems();
+        LunarOriginsCreativeTabs.init();
         LunarOriginsPowers.register();
         initLoot();
         initEvents();
